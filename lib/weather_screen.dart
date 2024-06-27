@@ -63,10 +63,18 @@ class _WeatherScreenState extends State<WeatherScreen> {
           if(snapshot.hasError){
             return Center(child: Text(snapshot.error.toString()));
           }
-
         final data = snapshot.data!;
-      
-        final currentTemp = data['list'][0]['main']['temp'];
+        final currentWeatherData = data['list'][0];
+
+        final currentTemp = currentWeatherData['main']['temp'];
+        final currentSky = currentWeatherData['weather'][0]['main'];
+        final currentPressure = currentWeatherData['main']['pressure'];
+        
+        final windSpeed = currentWeatherData['wind']['speed'];
+        
+        final currentHumidity = currentWeatherData['main']['humidity'];
+        
+        
 
           return Padding(
             padding: const EdgeInsets.all(16.0),
@@ -100,14 +108,14 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                 ),
                               ),
                               const SizedBox(height: 16),
-                              const Icon(
-                                Icons.cloud,
+                              Icon(
+                              currentSky == 'Clouds' || currentSky == 'Rain' ? Icons.cloud : Icons.sunny,
                                 size: 64,
                               ),
                               const SizedBox(height: 16),
-                              const Text(
-                                'Rain',
-                                style: TextStyle(
+                               Text(
+                                currentSky,
+                                style: const TextStyle(
                                   fontSize: 16,
                                 ),
                               ),
@@ -176,23 +184,23 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 const SizedBox(
                   height: 8,
                 ),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     AdditionalInfoItem(
                       icon: Icons.water_drop,
                       label: 'Humidity',
-                      value: '91',
+                      value: currentHumidity.toString(),
                     ),
-                    AdditionalInfoItem(
+                      AdditionalInfoItem(
                       icon: Icons.air,
                       label: 'Wind Speed',
-                      value: '7.5',
+                      value: windSpeed.toString(),
                     ),
                     AdditionalInfoItem(
                       icon: Icons.beach_access,
                       label: 'Pressure',
-                      value: '1000',
+                      value: currentPressure.toString(),
                     ),
                   ],
                 ),

@@ -140,7 +140,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   height: 20,
                 ),
                 const Text(
-                  'Weather Forecats',
+                  'Weather Forecast',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,

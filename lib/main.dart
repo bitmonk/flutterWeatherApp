@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: const WeatherScreen(),
-      theme: ThemeData.dark(
+      theme: ThemeData.light(
         useMaterial3: true,
       ),
     );
